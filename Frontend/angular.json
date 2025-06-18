@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "my-first-app": {
+    "fmh": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -11,10 +11,12 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular/build:application",
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "browser": "src/main.ts",
-            "polyfills": [
+              "outputPath": "dist/fmh",
+              "main": "src/main.ts",
+              "index": "src/index.html",
+              "polyfills": [
               "zone.js"
             ],
             "tsConfig": "tsconfig.app.json",
@@ -57,13 +59,13 @@
           "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "@angular/build:dev-server",
+          "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "my-first-app:build:production"
+              "buildTarget": "fmh:build:production"
             },
             "development": {
-              "buildTarget": "my-first-app:build:development"
+              "buildTarget": "fmh:build:development"
             }
           },
           "defaultConfiguration": "development"

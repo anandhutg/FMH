@@ -3,7 +3,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PropertyCardComponent } from "../property-card/property-card.component";
-import { IProperty } from '../IProperty.interfacce';
+import { IPropertyBase } from '../../model/ipropertybase';
+
 @Component({
   selector: 'app-add-property',
   imports: [FormsModule, CommonModule, PropertyCardComponent],
@@ -21,16 +22,21 @@ export class AddPropertyComponent implements OnInit {
   constructor(private router:Router) { }
 
   //Will come from masters
-  propertTypes :Array<string> =["House","Apartment","Duplex"]
+  propertyTypes :Array<string> =["House","Apartment","Duplex"]
   furnishTypes :Array<string> =['Fully','Semi','Unfurnished']
   entranceTypes :Array<string>=['East','West','South','North']
   
-  propertyView :IProperty={
-    Id :0,
-    Name:'',
-    Price:0,
-    SellRent:0,
-    Type:""
+  propertyView :IPropertyBase={
+    Id: 0,
+    Name: '',
+    Price: 0,
+    SellRent: 0,
+    PType: "",
+    FType: "",
+    BHK: 0,
+    BuiltArea: 0,
+    City: '',
+    RTM: 0
   };
 
   ngOnInit() {
@@ -48,5 +54,6 @@ export class AddPropertyComponent implements OnInit {
   onSubmit(){
     console.log('Congrats,Form Submitted');
     console.log(this.addPropertyForm);
+    console.log('SellRent='+this.propertyView.SellRent);
   }
 }

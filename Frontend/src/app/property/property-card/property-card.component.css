@@ -1,3 +1,6 @@
+.card{
+    min-height: 150px;
+}
 .card:hover img{
     transform: (1.2,1.2);
     transition-duration: 500ms;
