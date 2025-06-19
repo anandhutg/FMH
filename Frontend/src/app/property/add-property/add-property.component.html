@@ -6,41 +6,44 @@
     <h3>List Your Property</h3>
   </div>
   <div class="card-body">
-      <form (ngSubmit)='onSubmit()' #Form="ngForm">
+      <form (ngSubmit)='onSubmit()' [formGroup]="addPropertyForm">
       <ul class="nav nav-tabs">
       <li class="nav-item"  >
-      <a [class.active]="selectedTab === 0" class="nav-link" (click)="selectTab(0)" style="cursor: pointer;">Basic Info</a>
+      <a [class.active]="selectedTab === 0" class="nav-link" (click)="selectTab(0,0,true)" style="cursor: pointer;">Basic Info</a>
       </li>
       <li class="nav-item" >
-      <a [class.active]="selectedTab === 1" class="nav-link" (click)="selectTab(1)" style="cursor: pointer;">Pricing and Area</a>
+      <a [class.active]="selectedTab === 1" class="nav-link" (click)="selectTab(1,1,true)" style="cursor: pointer;">Pricing and Area</a>
       </li>
       <li class="nav-item" >
-      <a [class.active]="selectedTab === 2" class="nav-link" (click)="selectTab(2)" style="cursor: pointer;">Address</a>
+      <a [class.active]="selectedTab === 2" class="nav-link" (click)="selectTab(2,2,true)" style="cursor: pointer;">Address</a>
       </li>
       <li class="nav-item" >
-      <a [class.active]="selectedTab === 3" class="nav-link" (click)="selectTab(3)" style="cursor: pointer;">Other Details</a>
+      <a [class.active]="selectedTab === 3" class="nav-link" (click)="selectTab(3,3,true)" style="cursor: pointer;">Other Details</a>
       </li>
       <li class="nav-item" >
-      <a [class.active]="selectedTab === 4" class="nav-link" (click)="selectTab(4)" style="cursor: pointer;">Upload Photos</a>
+      <a [class.active]="selectedTab === 4" class="nav-link" (click)="selectTab(4,4,true)" style="cursor: pointer;">Upload Photos</a>
       </li>
       </ul>
       <div class="tab-content mt-3">
 <!----------------------------------------------------------------------------------------------------------------------->
-<div *ngIf="selectedTab === 0" class="tab-pane active">
+<div *ngIf="selectedTab === 0" class="tab-pane active" formGroupName="BasicInfo">
       <!---SellRent RadioButton--->
       <div class="form-group col-12">
         <p>I want to</p>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="SellRent" id="radioDefault1" value="1" [(ngModel)]="propertyView.SellRent">
+      <div class="form-check form-check-inline" >
+        <input class="form-check-input" type="radio" formControlName="SellRent" id="radioDefault1" value="1" [(ngModel)]="propertyView.SellRent"  required>
         <label class="form-check-label" for="radioDefault1">
           Sell
         </label>
       </div>
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="SellRent" id="radioDefault2" value="2" [(ngModel)]="propertyView.SellRent">
+        <input class="form-check-input" type="radio" formControlName="SellRent" id="radioDefault2" value="2" [(ngModel)]="propertyView.SellRent">
         <label class="form-check-label" for="radioDefault2">
           Rent
         </label>
+      </div>
+      <div class="error-message" *ngIf="BasicInfo.get('SellRent')?.invalid && nextClicked">
+        Please select sell or rent
       </div>
       </div>
     <!---BHK RadioButton-------------->
@@ -51,7 +54,7 @@
     <input
     class="form-check-input"
     type="radio"
-    name="BHK"
+    formControlName="BHK"
     [id]="'bhk' + bhk"
     [value]="bhk"
     [(ngModel)]="propertyView.BHK"
@@ -63,6 +66,9 @@
     {{ bhk }} BHK
     </label>
     </div>
+      <div class="error-message" *ngIf="BasicInfo.get('BHK')?.invalid && nextClicked">
+        Please select required BHK
+      </div>
     </div>
     <!-----PropertyTypes------------------------->
     <br>
@@ -72,7 +78,7 @@
     <input
     class="form-check-input"
     type="radio"
-    name="PType"
+    formControlName="PType"
     [id]="'ptype' + ptype"
     [value]="ptype"
     [(ngModel)]="propertyView.PType"
@@ -84,6 +90,9 @@
     {{ ptype }} 
     </label>
     </div>
+          <div class="error-message" *ngIf="BasicInfo.get('PType')?.invalid && nextClicked">
+              Please select required Property Type
+          </div>
     </div>
     <!-----FurnsihType------------------------->
     <br>
@@ -93,7 +102,7 @@
     <input
     class="form-check-input"
     type="radio"
-    name="FType"
+    formControlName="FType"
     [id]="'ftype' + ftype"
     [value]="ftype"
     [(ngModel)]="propertyView.FType"
@@ -105,29 +114,38 @@
     {{ ftype }}
     </label>
     </div>
+          <div class="error-message" *ngIf="BasicInfo.get('FType')?.invalid && nextClicked">
+            Please select required Furnish Type
+          </div>
     </div>
     <!------------------------------>
     <br>
       <div class="form-group col-12" >
         <label for="name">In Building/Society</label>
-        <input type="text" class="form-control" #propName="ngModel" ngModel name="Name" minlength="5" required>
-        <span *ngIf="!propName.valid && propName.touched" class="error-block">
-          <span *ngIf="propName.errors?.['minlength']">Name must be 5 char long</span>
-          <span *ngIf="propName.errors?.['required']">Please provide name</span>
-        </span>
+        <input type="text" class="form-control" formControlName="Name" minlength="5" required [(ngModel)]="propertyView.Name">
+                  <div class="error-message error-block" *ngIf="BasicInfo.get('Name')?.invalid && nextClicked">
+                      Please Enter Building/Society
+                  </div>
       </div>
       <br>
       <div class="form-group col-12">
         <label for="name">City</label>
-        <input type="text" class="form-control" name="City" [(ngModel)]="propertyView.City">
+        <input type="text" class="form-control" formControlName="City" [(ngModel)]="propertyView.City" >
+                  <div class="error-message error-block" *ngIf="BasicInfo.get('City')?.invalid && nextClicked">
+                      Please Enter City
+                  </div>
       </div>
-      <button class="btn btn-primary w-100 m-2" (click)="selectTab(1)" [disabled]="!propertyView.SellRent">Next</button>
+      <button class="btn btn-primary w-100 m-2" type="button" (click)="selectTab(0,1,BasicInfo.valid)">Next</button>
 </div>
 <!-- ------------------------------------------------------------------------------------------- -->
-      <div *ngIf="selectedTab === 1" class="tab-pane active">
-      <div class="form-group col-12">
-                <label>Price (in USD)</label>
-                <input type="text" class="form-control" name="Price" [(ngModel)]="propertyView.Price">
+      <div *ngIf="selectedTab === 1" class="tab-pane active" formGroupName="PriceInfo">
+              <div class="form-group col-12">
+                <label *ngIf="SellRent.value==1">Price (in USD)</label>
+                <label *ngIf="SellRent.value==2">Rent (in USD)</label>
+                <input type="text" class="form-control" formControlName="Price" [(ngModel)]="propertyView.Price ">
+                  <div class="error-message error-block" *ngIf="Price?.invalid && nextClicked">
+                      Please Enter BuiltArea
+                  </div>
               </div>
 
               <div class="form-group col-12">
@@ -142,15 +160,18 @@
 
               <div class="form-group col-12">
                 <label>Built Area (in Sqr Feet)</label>
-                <input type="text" class="form-control" name="BuiltArea" [(ngModel)]="propertyView.BuiltArea">
+                <input type="text" class="form-control" formControlName="BuiltArea" [(ngModel)]="propertyView.BuiltArea">
+                  <div class="error-message error-block" *ngIf="PriceInfo.get('BuiltArea')?.invalid && nextClicked">
+                      Please Enter BuiltArea
+                  </div>
               </div>
 
               <div class="form-group col-12">
                 <label>Carpet Area(in Sqr Feet)</label>
                 <input type="text" class="form-control">
               </div>
-      <button class="btn btn-secondary w-100 m-2" (click)="selectTab(0)">Back</button>
-      <button class="btn btn-primary w-100 m-2" (click)="selectTab(2)">Next</button>
+      <button class="btn btn-secondary w-100 m-2" (click)="selectTab(0,0,true)">Back</button>
+      <button class="btn btn-primary w-100 m-2" type="button" (click)="selectTab(1,2,PriceInfo.valid)">Next</button>
       </div>
 <!-- ---------------------------------------------------------------------------------------- -->
       <div *ngIf="selectedTab === 2" class="tab-pane active">
@@ -173,8 +194,8 @@
               <label>Landmark</label>
               <input type="text" class="form-control">
             </div>
-      <button class="btn btn-secondary w-100 m-2" (click)="selectTab(1)">Back</button>
-      <button class="btn btn-primary w-100 m-2" (click)="selectTab(3)">Next</button>
+      <button class="btn btn-secondary w-100 m-2" (click)="selectTab(1,1,true)">Back</button>
+      <button class="btn btn-primary w-100 m-2" (click)="selectTab(2,3,true)">Next</button>
       </div>
 <!-------------------------------------------------------------------------------------------  -->
       <div *ngIf="selectedTab === 3" class="tab-pane active">
@@ -189,7 +210,7 @@
             <br>
             <div class="form-group col-3">
               <label>Possession/Avaialble From</label>
-              <input type="date" class="form-control" [(ngModel)]="defaultDate">
+              <input type="date" class="form-control" [(ngModel)]="defaultDate" [ngModelOptions]="{standalone: true}">
             </div>
             <br>
             <div class="form-group col-12">
@@ -202,7 +223,7 @@
               <p>Gated Community</p>
               <!---------------Gated Community------------------------>
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="GatedC" id="radioDefault1" checked>
+        <input class="form-check-input" type="radio" name="GatedC" id="radioDefault1" >
         <label class="form-check-label" for="radioDefault1">
           Yes
         </label>
@@ -226,7 +247,7 @@
     name="EntranceType"
     [id]="'etype' + etype"
     [value]="etype"
-    [(ngModel)]="entranceTypes[0]"
+    [(ngModel)]="entranceTypes[0]" [ngModelOptions]="{standalone: true}"
     />
     <label
     class="form-check-label"
@@ -242,8 +263,8 @@
               <label>Description</label>
               <textarea type="text" class="form-control" rows="6"></textarea>
             </div>
-      <button class="btn btn-secondary w-100 m-2" (click)="selectTab(2)">Back</button>
-      <button class="btn btn-primary w-100 m-2" (click)="selectTab(4)">Next</button>
+      <button class="btn btn-secondary w-100 m-2" (click)="selectTab(2,2,true)">Back</button>
+      <button class="btn btn-primary w-100 m-2" (click)="selectTab(3,4,true)">Next</button>
       </div>
 <!-- ---------------------------------------------------------------------------------------- -->
       <div *ngIf="selectedTab === 4" class="tab-pane active">
@@ -253,9 +274,9 @@
                   This is under construction
               </div>
             </div>
-      <button class="btn btn-secondary w-100 m-2" (click)="selectTab(3)">Back</button>
+      <button class="btn btn-secondary w-100 m-2" (click)="selectTab(3,3,true)">Back</button>
 
-      <button type="reset" class="btn btn-primary w-100 m-2" (click)="selectTab(4)">Cancel</button>
+      <button type="reset" class="btn btn-primary w-100 m-2" (click)="selectTab(4,4,true)">Cancel</button>
       <button  type="submit" class="btn btn-primary w-100 m-2">Save</button>
       </div>
 <!-------------------------------------------------------------------------------------------  -->

@@ -28,7 +28,15 @@ export class PropertyListComponent implements OnInit{
             data=>{
                  this.properties=data;
                  //console.log(data);
-                 console.log(this.route.snapshot.url.toString());
+                console.log(this.route.snapshot.url.toString());
+                const newPropertyString=localStorage.getItem('newProp')
+                if(newPropertyString){
+                  const newProperty= JSON.parse(newPropertyString);
+                  if(newProperty.SellRent==this.SellRent){
+                    this.properties=[newProperty,...this.properties];
+                  }
+                }
+                
            },
            error =>{
             console.log('httperror:');
