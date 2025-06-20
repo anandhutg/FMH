@@ -139,14 +139,15 @@ export class AddPropertyComponent implements OnInit {
   }
 
   mapProperty():void{
+    this.property.Id=this.housingService.newPropID();
     this.property.SellRent=+this.SellRent.value;
-    this.property.Name!=this.BasicInfo.get('Name');
-    this.property.PType!=this.BasicInfo.get('PType');
-    this.property.FType!=this.BasicInfo.get('FType');
-    this.property.Price!=this.Price.value;
-    this.property.BHK!=this.BasicInfo.get('BHK');
-    this.property.BuiltArea!=this.PriceInfo.get('BuiltArea');
-    this.property.City!=this.addPropertyForm.get('City');
-    this.property.Date!=new Date().toString();
+    this.property.Name=this.BasicInfo.get('Name')?.value;
+    this.property.PType=this.BasicInfo.get('PType')?.value;
+    this.property.FType=this.BasicInfo.get('FType')?.value;
+    this.property.Price=this.Price.value;
+    this.property.BHK=this.BasicInfo.get('BHK')?.value;
+    this.property.BuiltArea=this.PriceInfo.get('BuiltArea')?.value;
+    this.property.City=this.BasicInfo.get('City')?.value;
+    this.property.Date=new Date().toString();
   }
 }
