@@ -130,7 +130,9 @@
       <br>
       <div class="form-group col-12">
         <label for="name">City</label>
-        <input type="text" class="form-control" formControlName="City" [(ngModel)]="propertyView.City" >
+        <select class="form-control" formControlName="City" [(ngModel)]="propertyView.City" >
+          <option *ngFor="let city of cityList" value="{{city}}">{{city}}</option>
+        </select>
                   <div class="error-message error-block" *ngIf="BasicInfo.get('City')?.invalid && nextClicked">
                       Please Enter City
                   </div>

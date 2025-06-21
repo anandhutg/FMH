@@ -11,6 +11,10 @@ import { getSymbolIterator } from 'rxjs/internal/symbol/iterator';
 export class Housing {
 
   constructor(private http:HttpClient) { }
+
+  getAllCities(): Observable<string[]>{
+    return this.http.get<string[]>('http://localhost:5289/api/city');
+  }
   getAllproperties(SellRent:number): Observable<IPropertyBase[]>{
     return this.http.get<{[key:string]:IPropertyBase }>('data/properties.json').pipe(
       map(data=>{
