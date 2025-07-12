@@ -1,0 +1,97 @@
+Radio Buttons :
+
+1.If there are two radio buttons only :
+
+      <div *ngIf="selectedTab === 0" class="tab-pane active">
+      <!---SellRent RadioButton--->
+      <div class="form-group col-12">
+        <p>I want to</p>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="SellRent" id="radioDefault1" checked>
+        <label class="form-check-label" for="radioDefault1">
+          Sell
+        </label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="SellRent" id="radioDefault2" >
+        <label class="form-check-label" for="radioDefault2">
+          Rent
+        </label>
+      </div>
+      </div>
+
+2.If there are more than one radio buttons:
+
+    <br>
+    <div class="form-group col-12">
+    <p>BHK</p>
+    <div *ngFor="let bhk of [1, 2, 3, 4]" class="form-check form-check-inline">
+    <input
+    class="form-check-input"
+    type="radio"
+    name="BHK"
+    [id]="'bhk' + bhk"
+    [value]="bhk"
+    [(ngModel)]="selectedBHK"
+    />
+    <label
+    class="form-check-label"
+    [for]="'bhk' + bhk"
+    >
+    {{ bhk }} BHK
+    </label>
+    </div>
+    </div>
+
+Define slectedBhk = 1 in corresponding component
+
+3.More types of radio buttons:
+
+   <br>
+    <div class="form-group col-12">
+    <p>Property Type</p>
+    <div *ngFor="let ptype of propertTypes" class="form-check form-check-inline">
+    <input
+    class="form-check-input"
+    type="radio"
+    name="PropertyType"
+    [id]="'ptype' + ptype"
+    [value]="ptype"
+    [(ngModel)]="propertTypes[0]"
+    />
+    <label
+    class="form-check-label"
+    [for]="'ptype' + ptype"
+    >
+    {{ ptype }} 
+    </label>
+    </div>
+    </div>
+Define in corresponding component :
+propertTypes :Array<string> =['House','Apartment','Duplex']
+
+
+TWO WAY BINDING FOR PROPERTY VIEW :
+
+Add in add property html
+<div class="col-4">
+  <div class="card-header">
+    <h3>Your Property Preview</h3>
+  </div>
+  <div>
+    <app-property-card [property]="propertyView"></app-property-card>
+  </div>
+</div>
+
+Then in component define propertyView as ->
+propertyView :IProperty={
+    Id :0,
+    Name:'',
+    Price:0,
+    SellRent:0,
+    Type:""
+  };
+For two way binding of price property in add property html add in <input> -> [(ngModel)]="propertyView.Price"
+
+<input type="text" class="form-control" name="price" [(ngModel)]="propertyView.Price">
+

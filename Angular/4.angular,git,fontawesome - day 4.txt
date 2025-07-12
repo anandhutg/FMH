@@ -1,0 +1,38 @@
+NOT THE EXACT SOLUTION :
+
+git init
+git remote set-url origin https://github.com/anandhutg/FMH
+
+
+
+git pull origin main --rebase
+git push origin main
+
+git add .
+git commit -m "Initial commit"
+git push -u origin main  # or master
+
+git pull origin main --rebase
+git push -u origin main
+
+React :
+<div *ngFor="let properties of list" class="shadow-lg col-sm-4 p-3">
+    <app-property-card></app-property-card>
+</div>
+
+a-ngFor -> To get a loop for items in an array
+
+font awesome website for icons ->
+Create kit code -> Paste it below head tag in index.html
+<script src="https://kit.fontawesome.com/934ff7a7aa.js" crossorigin="anonymous"></script>   ->kit code
+
+Search the icon to use and paste the css code ->  <i class="fa-regular fa-pen-to-square"></i>
+
+<li class="list-inline-item">
+                <button class="btn btn-primary">
+			<i class="fa-regular fa-pen-to-square"></i>
+		</button>
+</li>
+
+
+Problem to be addressed : GitHub Configuration still not done correctly

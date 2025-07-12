@@ -1,0 +1,31 @@
+Login authentication service ->
+authUser(user:any){
+  let userArray =[];
+  const userString= localStorage.getItem('Users');
+  if (userString){
+    userArray=JSON.parse(userString);
+  }
+  return userArray.find((p:User) =>p.userName===user.userName && p.password===user.password);
+}
+
+In login component ->
+
+constructor(private authService:AuthService,
+    private alertify : AlertifyService
+  ) { }
+
+onLogin(loginForm:NgForm){
+    console.log(loginForm.value);
+    const token =this.authService.authUser(loginForm.value);
+    if(token){
+      localStorage.setItem('token',token.userName);
+      this.alertify.success('Login Succesfully!!');
+    }
+    else{
+      this.alertify.error('User id or password is wrong!!')
+    }
+  }
+
+ngx bootstrap -> https://valor-software.com/ngx-bootstrap/documentation#getting-started
+To install : npm install ngx-bootstrap --save
+

@@ -1,0 +1,33 @@
+TO add controllers in program.cs ->
+
+add ->builder.Services.AddControllers();
+
+add ->app.MapControllers();
+
+run ->http://localhost:5289/api/city
+
+
+
+dotnet clean
+dotnet build
+dotnet run
+
+
+To retrieve data into angular ->
+
+In housingService.ts define ->  
+getAllCities(): Observable<string[]>{
+    return this.http.get<string[]>('http://localhost:5289/api/city');
+  }
+
+In add-propey.ts ->
+Define array cityList!: string[];
+
+To copy api data to array cityList ->
+
+ngOnInit() {
+    this.CreateAddPropertyForm();
+    this.housingService.getAllCities().subscribe(data =>{
+      this.cityList=data;
+    });
+  }

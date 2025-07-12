@@ -1,0 +1,11 @@
+To give a shadow to the property-card using css :
+<div class="col-8 shadow-lg p-0 bg-white">
+
+To hide icons showing while property preview :
+Add @Input() hideIcons !: boolean; in property-card component //Here hideicons is initialised as false
+set *ngIf="!hideIcons" in html of icons in property-card html file
+Then add in property preview(add-property component) html file using propery binding :
+[hideIcons]="true"
+
+PROBLEM :
+Not able to group controls in template driven form (List Property Form)

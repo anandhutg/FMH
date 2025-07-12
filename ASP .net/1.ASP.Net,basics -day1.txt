@@ -1,0 +1,7 @@
+PS C:\upskill\FMH\WebAPI> dotnet new --help -> To know the description of dotnet new command
+
+PS C:\upskill\FMH\Webapi> dotnet new webapi --no-https -> To create webapi project with no https support
+
+CTRL + SHIFT + P -> Type >build -> Generate assets for buld and debug
+
+PROBLEM : NOT ABLE TO RUN AND CONCEPTS NOT CLEAR

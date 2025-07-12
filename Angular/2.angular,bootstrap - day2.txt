@@ -1,0 +1,25 @@
+VS Code extensions for angular :
+-> Angular Essentials
+-> Auto Rename Tag
+-> Bracket Pair Colorizer
+-> Angular Files
+-> Intellisense for css
+
+ng g c property-list -> To generate component property-list in app folder
+
+npm install bootstrap --save -> To install bootstrap
+
+In angular.json file add
+ "styles": [
+              "src/styles.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+            ]
+          },
+          "configurations": {
+            
+"node_modules/bootstrap/dist/css/bootstrap.min.css" -> To include bootstrap in angular
+
+Find bootstrap code for navbar and paste in nav-bar.component.html
+
+
+PROBLEM TO BE SOLVED : IMAGE IS NOT SHOWING

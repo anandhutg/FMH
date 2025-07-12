@@ -1,0 +1,42 @@
+In userService.ts developed a code for localstorage ->
+export class UserServiceService {
+users:any[]=[];
+constructor() { }
+addUser(user:User){
+    const userString = localStorage.getItem('Users')
+    if(userString){ 
+      try{
+        this.users = JSON.parse(userString);
+      }catch(e){
+        console.log(e)
+      }
+    }
+    this.users=[user, ...this.users];
+    localStorage.setItem('Users',JSON.stringify(this.users));
+  }
+
+Developed a model interface User for local storage ->
+export interface User {
+    userName : string;
+    email : string;
+    password : string;
+    mobile :number;
+}
+
+
+
+https://alertifyjs.com/ for adding alert notifications
+
+To install alertify :
+npm install alertifyjs --save
+
+In style.css :
+
+@import '../node_modules/alertifyjs/build/css/alertify.min.css';
+@import '../node_modules/alertifyjs/build/css/themes/bootstrap.min.css';
+
+In the component going to use alertify ->
+
+import * as alertify from 'alertifyjs';
+
+Create file named alertifytype.d.ts in src folder -> declare module 'alertifyjs';

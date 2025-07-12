@@ -1,0 +1,58 @@
+Create an reactive form :
+
+In component.ts
+
+addPropertyForm:FormGroup;
+
+In constructor add -> private fb :FormBuilder
+
+Define function -> 
+CreateAddPropertyForm(){
+    this.addPropertyForm = this.fb.group({
+      SellRent:[null,Validators.required],
+      Ptype:[null,Validators.required],
+      Name:[null,Validators.required],
+      Price:[null,Validators.required],
+      BuiltArea:[null,Validators.required],
+    })
+  }
+
+In ngOnInit() method call CreateAddPropertyForm() ->
+
+ngOnInit() {
+    this.CreateAddPropertyForm();
+}
+
+In html file in form tab -> add addPropertyForm in [formGroup]
+
+ <form (ngSubmit)='onSubmit()' [formGroup]="addPropertyForm">
+
+In reactive forms formControlName is used to bind different form controls.
+
+<input type="text" class="form-control" formControlName="Name" minlength="5" required>
+
+
+Grouping controls in reactive forms :
+  CreateAddPropertyForm(){
+    this.addPropertyForm = this.fb.group({
+      BasicInfo:this.fb.group({
+        SellRent:[null,Validators.required],
+        PType:[null,Validators.required],
+        FType:[null,Validators.required],
+        Name:[null,Validators.required],
+        City:[null,Validators.required],
+        BHK:[null,Validators.required]
+      }),
+      PriceInfo:this.fb.group({
+        Price:[null,Validators.required],
+        BuiltArea:[null,Validators.required],
+      }),
+    });
+  }
+
+In html file ->
+add formGroupName="BasicInfo" in the tab containing all the corresponding controls and
+add formGroupName="PriceInfo" in  the tab containing price and builtarea controls
+
+
+PROBLEM : Newly listed property has no contents

@@ -1,0 +1,4 @@
+PROBLEM : property id is NaN instead of corresponding id
+SOLUTION : The term id used was case sensitive . Changed all of them to "Id" 
+
+PROBLEM TO BE SOLVED :Didn't understand the sellrent concept introduced in last 5minutes of part-3 of routing vedio.The output is working as said in vedio

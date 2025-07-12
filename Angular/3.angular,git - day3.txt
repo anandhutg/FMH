@@ -1,0 +1,31 @@
+SUB : IMAGE IS NOT SHOWING
+SOLUTION :
+In package.json make sure look like this if image is in folder src/assets/images/image.jpg
+"assets": [
+              "src/assets/images",
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
+            ],
+
+SOURCE CONTROL MANAGEMENT
+git-scm/download -> Download git
+
+git init -> initialise git(in terminal)
+changes -> stage all changes
+commit -> commit
+
+In terminal :
+
+git config --global user.email "anandhutg032@gmail.com"
+git config --global user.name "anandhutg"
+
+commit -> commit staged
+
+Create a repository in GitHub by loging in
+
+In terminal :
+git remote add origin https://github.com/anandhutg/FMH.git
+
+Problem To be solved : GitHub push showing error 

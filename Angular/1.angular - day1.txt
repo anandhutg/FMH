@@ -1,0 +1,19 @@
+cli.angular.oi
+
+npm install -g @angular/cli ->install angular
+
+nodejs.org -> To download/update nodejs and run npm commands 
+
+ng --version -> To verify version
+
+C:\upskill>ng new my-first-app
+ng new my-first-app -> To create first application
+
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -> To temporarily allow typescript
+
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned -> To Permanently allow typescript
+
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Undefined -> To remove permanently allowed typescript
+
+ng serve --open -> Run the application
+

@@ -1,0 +1,15 @@
+https://dotnet.microsoft.com/en-us/download -> To download and install .Net
+PS C:\upskill\FMH> dotnet --info
+PS C:\upskill\FMH> dotnet --version
+
+Extenstions to be installed :
+
+C# Extensions
+ASP.NET Helper
+ASP.NET Core
+NUGET package manager
+SQL Server
+
+https://www.postman.com/downloads/ -> To download and install postman
+
+https://www.microsoft.com/en-in/sql-server/sql-server-downloads ->Download and install SQL Server 2022 Express

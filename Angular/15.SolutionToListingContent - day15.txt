@@ -1,0 +1,85 @@
+Solution :
+For Listing a new property through form ->
+Create property.ts ->
+
+import { IPropertyBase } from "./ipropertybase";
+
+export class Property implements IPropertyBase{
+    Id: number | null = null;
+    SellRent:number | null = null;
+    Name:string | null = null;
+    PType:string | null = null;
+    FType:string | null = null;
+    Price:number | null = null;
+    BHK:number  | null = null;
+    BuiltArea:number | null = null;
+    City:string | null = null;
+    RTM:number | null = null;
+    Date!:string;
+    Image?:string;
+    
+}
+
+In add-property.component.ts ->
+
+add ->  constructor(private router:Router,
+              private housingService : Housing,
+              private alertify:AlertifyService) { }
+
+add -> onSubmit(){
+    this.nextClicked=true;
+    if(this.allTabsValid()){
+      this.mapProperty();
+      this.housingService.addProperty(this.property);
+      this.alertify.success('Congrats,Your property is successfully Registered');
+      console.log(this.addPropertyForm);
+
+      if(this.SellRent.value==='2'){
+        this.router.navigate(['/rent-property']);
+      }
+      else{
+        this.router.navigate(['/'])
+      }
+
+Define ->
+  mapProperty():void{
+    this.property.SellRent=+this.SellRent.value;
+    this.property.Name=this.BasicInfo.get('Name')?.value;
+    this.property.PType=this.BasicInfo.get('PType')?.value;
+    this.property.FType=this.BasicInfo.get('FType')?.value;
+    this.property.Price=this.Price.value;
+    this.property.BHK=this.BasicInfo.get('BHK')?.value;
+    this.property.BuiltArea=this.PriceInfo.get('BuiltArea')?.value;
+    this.property.City=this.BasicInfo.get('City')?.value;
+    this.property.Date=new Date().toString();
+  }
+
+In HousingService.ts
+Define ->
+
+  addProperty(property: Property){
+    localStorage.setItem('newProp',JSON.stringify(property));
+  }
+  
+
+In Propertylist.components.ts ->
+ngOnInit() :void {
+        if(this.route.snapshot.url.toString()){
+          this.SellRent=2;//Means we are on rent-property URL else we are on base URL
+        }
+
+        this.housingService.getAllproperties(this.SellRent).subscribe(
+            data=>{
+                 this.properties=data;
+                 //console.log(data);
+                console.log(this.route.snapshot.url.toString());
+                const newPropertyString=localStorage.getItem('newProp')
+                if(newPropertyString){
+                  const newProperty= JSON.parse(newPropertyString);
+                  if(newProperty.SellRent==this.SellRent){
+                    this.properties=[newProperty,...this.properties];
+                  }
+                }
+                
+           },
+}

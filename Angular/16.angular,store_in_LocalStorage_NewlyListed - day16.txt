@@ -1,0 +1,64 @@
+TO STORE NEWLY LISTED ITEM IN LOCALSTORAGE :
+
+In Housing.ts add->
+
+  newPropID():number{
+    const PIDString=localStorage.getItem('PID');
+    if(localStorage.getItem('PID') && PIDString)
+    {
+      localStorage.setItem('PID',String(+PIDString+1));
+      return +PIDString;
+    }
+    else
+    {
+        localStorage.setItem('PID','101');
+        return 101;
+    }
+
+In properlist.component.ts ->
+Comment          // const newPropertyString=localStorage.getItem('newProp')
+                // if(newPropertyString){
+                //   const newProperty= JSON.parse(newPropertyString);
+                //   if(newProperty.SellRent==this.SellRent){
+                //     this.properties=[newProperty,...this.properties];
+                //   }
+                // }
+This code was used to overwrite and show only newly added items
+
+In Housing.ts
+
+getAllproperties(SellRent:number): Observable<IPropertyBase[]>{
+    return this.http.get<{[key:string]:IPropertyBase }>('data/properties.json').pipe(
+      map(data=>{
+        const propertiesArray: Array <IPropertyBase> =[];
+
+//Added for new listing
+        const newPropString = localStorage.getItem('newProp');
+        if(newPropString){
+          const localProperties=JSON.parse(newPropString);
+          if(localProperties){
+            for(const id in localProperties){
+          if(localProperties.hasOwnProperty(id) && localProperties[id].SellRent==SellRent){
+              propertiesArray.push(localProperties[id]);
+          }
+        }
+          }
+        }
+
+//To listing from JSON FILE
+        for(const id in data){
+          if(data.hasOwnProperty(id) && data[id].SellRent==SellRent){
+              propertiesArray.push(data[id]);
+          }
+        }
+        return propertiesArray;
+      })
+    );
+  } 
+
+
+In add-property.component.ts add in mapProperty() method ->
+  mapProperty():void{
+    this.property.Id=this.housingService.newPropID();
+}
+            

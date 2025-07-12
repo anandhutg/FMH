@@ -1,0 +1,13 @@
+Reactive Forms :
+Used reactive forms to develop form for user registration
+
+//Getter methods for form controls--------------------------------
+  get userName() {
+    return this.registerationForm.get('userName') as FormControl;
+  } 
+
+//For FormGroup
+
+  get PriceInfo():FormGroup{
+    return this.addPropertyForm.get('PriceInfo') as FormGroup;
+  }

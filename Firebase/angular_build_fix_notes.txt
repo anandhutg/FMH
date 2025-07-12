@@ -1,0 +1,45 @@
+
+✅ Fix Summary: Angular Project Page Not Showing Content
+
+🔧 Issue Faced:
+- After `ng build`, deployed app showed “Page Not Found”.
+- `index.html` was missing in the `dist/` folder.
+- Firebase or browser reported: “This file does not exist and there was no index.html found...”
+- Angular build failed with errors like:  
+  - `Property main is not allowed.`
+  - `No loader configured for .html`
+  - `Could not find builder '@angular-devkit/build-angular:browser'`
+  - `Must have required property 'outputPath'`
+
+✅ Fixes You Applied (Step-by-Step)
+
+1. 🛠️ Corrected `angular.json` Configuration
+   - Used the correct builder:
+     "builder": "@angular-devkit/build-angular:browser"
+   - Added required options:
+     "main": "src/main.ts",
+     "index": "src/index.html",
+     "outputPath": "dist/fmh"
+
+2. 🧹 Cleaned Node Modules and Reinstalled Dependencies
+   - Remove old dependencies:
+     Remove-Item -Recurse -Force node_modules
+     Remove-Item -Force package-lock.json
+     npm install
+
+3. 🧩 Verified Required Angular Packages
+   - Ensured `@angular-devkit/build-angular` is installed:
+     npm install --save-dev @angular-devkit/build-angular
+
+4. 🏗️ Rebuilt the Project Properly
+   - Build using production configuration:
+     ng build --configuration production
+
+5. 🚀 Ensured Firebase is Serving Correct Output
+   - In firebase.json:
+     "public": "dist/fmh"
+
+✅ Final Outcome:
+- `dist/fmh/index.html` is correctly generated.
+- Firebase now serves the Angular application successfully.
+- Deployed website displays your content properly.

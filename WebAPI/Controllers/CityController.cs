@@ -1,4 +1,4 @@
-namespace City.Controllers
+namespace city.Controllers
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;

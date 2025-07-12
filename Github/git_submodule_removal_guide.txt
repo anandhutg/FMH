@@ -1,0 +1,21 @@
+✅ Commands to Remove Submodule and Re-add as Normal Folder
+
+🔁 1. Reset Git and clean the submodule
+git reset --hard
+
+Copy the module 'Frontend' somewhere else before deleting
+❌ 2. Delete the `Frontend/` folder (old submodule)
+Remove-Item -Recurse -Force Frontend
+
+💾 3. Restore the clean `Frontend/` folder
+(Copy your backup `Frontend/` folder into the root of your project again.)
+
+🧹 4. If `.git` exists inside `Frontend`, delete it:
+cd Frontend
+Remove-Item -Recurse -Force .git
+cd ..
+
+✅ 5. Add the folder as a regular directory
+git add Frontend
+git commit -m "Add Frontend as regular folder instead of submodule"
+git push origin main --force

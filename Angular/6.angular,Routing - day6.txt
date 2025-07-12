@@ -1,0 +1,46 @@
+Routing :
+ In main.ts ->
+
+bootstrapApplication(App, {
+  providers: [
+    provideRouter(appRoutes),
+    importProvidersFrom(HttpClientModule)
+  ]
+}).catch(err => console.error(err));
+
+For using routerLink instead of href to avoid reloading ->
+add RouterModule in navbar.component.ts
+
+@Component({
+  selector: 'app-nav-bar',
+  templateUrl: './nav-bar.component.html',
+  styleUrls: ['./nav-bar.component.css'],
+  imports:[RouterModule]
+})
+
+New routes to be added in app.routes.ts ->
+
+export const appRoutes: Routes = [
+  {path: '', component: PropertyListComponent },
+  {path: 'add-property', component:AddPropertyComponent },
+  {path: 'rent-property', component:AddPropertyComponent }
+];
+
+
+To add id of corresponding property detail ->
+In app.routes.ts
+
+{path: 'property-detail/:id', component: PropertyDetailComponent },
+
+and in property-card.component.html add [routerLink]="['/property-detail', property.Id]
+
+Problem to be solved : In property-detail.component when
+ 
+public propertyId!: number; 
+
+AND
+
+this.propertyId = +this.route.snapshot.params['id'];
+
+It shows as property-detail works! property id is NaN instead of corresponding id
+

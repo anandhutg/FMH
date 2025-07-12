@@ -1,0 +1,8 @@
+PROBLEM  :Didn't understand the sellrent concept introduced in last 5minutes of part-3 of routing vedio.The output is working as said in vedio
+SOLUTION : The page Sell and Buy was routed based on the value of SellRent becomes equal.The Sell page returns a value on routing where Buy page returns a null value.This is used to distinguish both.
+
+
+Template Driven Forms :
+Using this approach developed a form for Add New Property in List Property page
+
+Validators in angular : https://angular.dev/api/forms/Validators

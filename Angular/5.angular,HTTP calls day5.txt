@@ -1,0 +1,28 @@
+In app.ts add ->
+import { HttpClientModule } from '@angular/common/http';
+
+imports: [RouterOutlet,
+    PropertyCardComponent,
+    PropertyListComponent,
+    NavBarComponent,
+    HttpClientModule  
+  ],
+
+In angular.json ->
+ "assets": [
+              "src/data",
+              "src/assets/images",
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
+            ],
+
+Using service :
+
+To generate service create the folder service and open in service terminal :
+
+ng g service housing
+
+In app.ts ->
+providers:[Housing],
